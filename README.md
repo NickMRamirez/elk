@@ -52,6 +52,12 @@ Then you can run Docker commands such as:
 ~$ sudo docker inspect es1
 ```
 
+## Elasticsearch queries
+
+Get node info:
+* http://10.0.0.2:9200/_cat/nodes?v
+* http://10.0.0.2:9200/_nodes
+
 ## TODO
 
 * Figure out how to map a Docker volume to the container's */usr/share/elasticsearch/data* directory. Currently, this gives me an AccessDenied exception from Java. See https://github.com/docker-library/docs/issues/370.
