@@ -1,5 +1,25 @@
 # Elasticsearch Practice Project
 
+A project for practicing using Elasticsearch.
+
+## About this Project
+
+The following are some points about this project:
+
+* The host OS is CoreOS with an IP of 10.0.0.2
+* Access Elasticsearch at http://10.0.0.2:9200. It will take a minute or so before its available after starting it.
+* It runs an Elasticsearch cluster containing two nodes
+* Each node runs inside a Docker container
+* The containers use a Docker network to see one another
+
+## Setup
+
+You will require:
+
+1. VirtualBox, downloaded from the [VirtualBox website](https://www.virtualbox.org/wiki/Downloads).
+2. Vagrant, downloaded from the [Hashicorp website](https://www.vagrantup.com/downloads.html).
+3. An SSH client, such as the one that ships with [Git for Windows](https://git-scm.com/download/win). Be sure to choose the option to include the Unix tools on the Windows command line.
+
 To get started, clone this repository, `cd` into it and then issue the following command to create the environment:
 
 ```
@@ -17,24 +37,6 @@ To throw it away:
 ```
 ~$ vagrant destroy
 ```
-
-## For Windows users
-
-To use Vagrant on Windows, you will require:
-
-1. VirtualBox, downloaded from the [VirtualBox website](https://www.virtualbox.org/wiki/Downloads).
-2. Vagrant, downloaded from the [Hashicorp website](https://www.vagrantup.com/downloads.html).
-3. An SSH client, such as the one that ships with [Git for Windows](https://git-scm.com/download/win). Be sure to choose the option to include the Unix tools on the Windows command line.
-
-## About this Project
-
-The following are some points about this project:
-
-* The host OS is CoreOS with an IP of 10.0.0.2
-* Access Elasticsearch at http://10.0.0.2:9200. It will take a minute or so before its available after starting it.
-* It runs an Elasticsearch cluster containing two nodes
-* Each node runs inside a Docker container
-* The containers use a Docker network to see one another
 
 ## How to use
 
