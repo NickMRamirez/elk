@@ -32,7 +32,7 @@ The following are some points about this project:
 
 * The host OS is CoreOS with an IP of 10.0.0.2
 * Access Elasticsearch at http://10.0.0.2:9200. It will take a minute or so before its available after starting it.
-* It runs an Elasticsearch cluster containing three nodes
+* It runs an Elasticsearch cluster containing two nodes
 * Each node runs inside a Docker container
 * The containers use a Docker network to see one another
 
@@ -44,6 +44,14 @@ You can connect to the virtual machine using SSH:
 ~$ vagrant ssh
 ```
 
+Then you can run Docker commands such as:
+
+```
+~$ sudo docker ps -a
+~$ sudo docker logs es1
+~$ sudo docker inspect es1
+```
+
 ## TODO
 
-* Figure out how to map a Docker volume to the container's /usr/share/elasticsearch/data directory. Currently, this gives me an AccessDenied exception from Java. See https://github.com/docker-library/docs/issues/370.
+* Figure out how to map a Docker volume to the container's */usr/share/elasticsearch/data* directory. Currently, this gives me an AccessDenied exception from Java. See https://github.com/docker-library/docs/issues/370.
