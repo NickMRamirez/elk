@@ -15,9 +15,9 @@ Vagrant.configure("2") do |config|
     # Set its hostname
     host.vm.hostname = "host1"
 
-    # Give the virtual machine 2 GB of RAM
+    # Give the virtual machine 3 GB of RAM
     host.vm.provider :virtualbox do |vb|
-	    vb.customize ['modifyvm', :id, '--memory', '2000']
+	    vb.customize ['modifyvm', :id, '--memory', '3000']
 	  end
 
     # See https://github.com/spujadas/elk-docker/issues/92
@@ -33,9 +33,10 @@ Vagrant.configure("2") do |config|
 
     # Provision docker containers within the virtual machine
     host.vm.provision "docker" do |docker|
-      docker_image = "docker.elastic.co/elasticsearch/elasticsearch:5.2.2"
+      elasticsearch_image = "docker.elastic.co/elasticsearch/elasticsearch:5.2.2"
+      kibana_image = "docker.elastic.co/kibana/kibana:5.2.2"
 
-      arguments = [
+      es_arguments = [
         '--memory 768m',                       # Max memory for the container.                  
         '-e ES_JAVA_OPTS="-Xms512m -Xmx512m"', # Override default 2GB JVM heap size to be smaller.
         '-e cluster.name=es-cluster',          # Set cluster name. Must be the same for all nodes.
@@ -48,13 +49,18 @@ Vagrant.configure("2") do |config|
 
       # Elasticsearch node #1 - Master node, exposes port 9200
       docker.run "es1",
-        image: docker_image, 
-        args: arguments.join(" ") + " -e node.name=es1 -p 9200:9200"
+        image: elasticsearch_image, 
+        args: es_arguments.join(" ") + " -e node.name=es1 -p 9200:9200"
 
       # Elasticsearch node #2
       docker.run "es2",
-        image: docker_image, 
-        args: arguments.join(" ") + " -e node.name=es2 -e discovery.zen.ping.unicast.hosts=es1"
+        image: elasticsearch_image, 
+        args: es_arguments.join(" ") + " -e node.name=es2 -e discovery.zen.ping.unicast.hosts=es1"
+
+      # Kibana
+      docker.run "kibana1",
+        image: kibana_image,
+        args: "--memory 768m -p 5601:5601 --net elasticsearch_network -e ELASTICSEARCH_URL=http://es1:9200"
     end
   end
 end

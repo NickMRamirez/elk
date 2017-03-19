@@ -11,6 +11,7 @@ The following are some points about this project:
 * It runs an Elasticsearch cluster containing two nodes
 * Each node runs inside a Docker container
 * The containers use a Docker network to see one another
+* Access Kibana at http://10.0.0.2:5601 (this includes "Dev Tools - Console" which is the new Sense)
 
 ## Setup
 
