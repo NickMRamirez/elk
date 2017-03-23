@@ -61,3 +61,9 @@ GET /website/blogs/1
 ```
 GET /website/blogs/1?_source=title
 ```
+
+## Delete a document by ID
+
+```
+DELETE /website/blogs/1
+```
