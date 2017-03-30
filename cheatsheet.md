@@ -2,10 +2,10 @@
 
 Types of queries you can do.
 
-## Create an index called "website"
+## Create an index called "blog"
 
 ```
-POST /website
+POST /blog
 ```
 
 ## Get a list of indices
@@ -17,33 +17,33 @@ GET /_cat/indices?v
 ## Delete an index
 
 ```
-DELETE /website
+DELETE /blog
 ```
 
-## Add a document of type "blog", specifying an ID of "1"
+## Add a document of type "article", specifying an ID of "1"
 
 ```
-PUT /website/blogs/1
+PUT /blog/article/1
 {
   "title": "First entry",
   "content": "My first entry"
 }
 ```
 
-## Add a document of type "blog", specifying an ID of "1", but only if it does not already exist
+## Add a document of type "article", specifying an ID of "1", but only if it does not already exist
 
 ```
-PUT /website/blogs/1/_create
+PUT /blog/article/1/_create
 {
   "title": "First entry",
   "content": "My first entry"
 }
 ```
 
-## Add a document of type "blog", but let Elasticsearch autogenerate the ID
+## Add a document of type "article", but let Elasticsearch autogenerate the ID
 
 ```
-POST /website/blogs
+POST /blog/article
 {
     "title": "Second entry",
     "content": "My second entry"
@@ -53,17 +53,29 @@ POST /website/blogs
 ## Get a document by its ID
 
 ```
-GET /website/blogs/1
+GET /blog/article/1
 ```
 
 ## Get a document by ID, but only return the "title" field
 
 ```
-GET /website/blogs/1?_source=title
+GET /blog/article/1?_source=title
 ```
 
 ## Delete a document by ID
 
 ```
-DELETE /website/blogs/1
+DELETE /blog/article/1
+```
+
+## Return all documents in an index
+
+```
+GET /blog/_search
+```
+
+## Get a document by its version so that you can know whether you're trying to update the lastest version
+
+```
+GET /blog/article/1?version=1
 ```
