@@ -3,6 +3,12 @@
 
 Vagrant.configure("2") do |config|
 
+  config.vm.define "node1" do |node|
+    node.vm.box = "gbarbieru/xenial"
+    node.vm.network "private_network", ip: "10.0.0.3", netmask: "255.255.255.0"
+    node.vm.hostname = "node1"
+  end
+
   config.vm.define "host1" do |host|
 
     # Use current version of CoreOS from its 'alpha' channel
@@ -33,8 +39,8 @@ Vagrant.configure("2") do |config|
 
     # Provision docker containers within the virtual machine
     host.vm.provision "docker" do |docker|
-      elasticsearch_image = "docker.elastic.co/elasticsearch/elasticsearch:5.2.2"
-      kibana_image = "docker.elastic.co/kibana/kibana:5.2.2"
+      elasticsearch_image = "docker.elastic.co/elasticsearch/elasticsearch:5.3.1"
+      kibana_image = "docker.elastic.co/kibana/kibana:5.3.1"
 
       es_arguments = [
         '--memory 768m',                       # Max memory for the container.                  
